@@ -51,7 +51,7 @@ class SnakeGame:
         self.exit_button_y = (HEIGHT // 2) + 50
 
     def write_score(self):
-        with open("rezultatai.txt", "a") as file:
+        with open("Results.txt", "a") as file:
             file.write(f"Score: {self.score}\n")
 
     def find_highest_score(self):
@@ -59,7 +59,7 @@ class SnakeGame:
         score_pattern = re.compile(r"Score: (\d+)") # reguliari išraiška
 
         try:
-            with open("rezultatai.txt", "r") as file:
+            with open("Results.txt", "r") as file:
                 for line in file:
                     match = score_pattern.search(line)
                     if match:
@@ -67,7 +67,7 @@ class SnakeGame:
                         if score > highest_score:
                             highest_score = score
         except FileNotFoundError:
-            open("rezultatai.txt", "a").close()
+            open("Results.txt", "a").close()
 
         return highest_score
 
@@ -129,7 +129,7 @@ class SnakeGame:
         history_font = pygame.font.Font(None, 30)
         start_y = 50
         try:
-            with open("rezultatai.txt", "r") as file:
+            with open("Results.txt", "r") as file:
                 for line in file:
                     label = history_font.render(line.strip(), True, WHITE)
                     self.screen.blit(label, (50, start_y))
